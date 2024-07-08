@@ -1,0 +1,3 @@
+FROM nginx:alpine
+LABEL container.type=server
+ENTRYPOINT ["/bin/ash", "/volume/server.sh"]
