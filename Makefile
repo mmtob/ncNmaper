@@ -2,8 +2,8 @@ all : image_check
 	@ docker network create network --subnet=192.168.1.0/24
 	@ docker build . -tclient -f./Dockerfile.client
 	@ docker build . -tserver -f./Dockerfile.server
-	@ docker run --name server --network network -v ./server.sh:/volume/server.sh:ro -d server
-	@ docker run --name client --network network -v ./client.sh:/volume/client.sh:ro -d client
+	@ docker run --name server --network network -v ./server.sh:/volume/server.sh:ro -v server_ip:/volume/server_ip --entrypoint ash -d server /volume/server.sh
+	@ docker run --name client --network network -v ./client.sh:/volume/client.sh:ro -v server_ip:/volume/server_ip:ro -it client ash /volume/client.sh
 
 clean: download_clean
 	-docker rm --force client server

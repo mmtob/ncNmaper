@@ -1,3 +1,2 @@
 FROM nginx:alpine
 LABEL container.type=client
-ENTRYPOINT ["/bin/ash", "/volume/client.sh"]

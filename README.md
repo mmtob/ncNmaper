@@ -1,4 +1,6 @@
-> You can **make** fast start and after all **make clean**
+>
+> You can **make** fast start client and after all can **make clean**
+>
 
 # Preparation
 ## Download alpaka image
@@ -53,4 +55,35 @@ docker run \
     --network network \
     --detach \
     client
+```
+
+# To verify containers connectivity between containers:
+>> 
+>>> 3.4
+>> You can see that server and client in one network, by this command:
+``` bash
+docker network inspect network
+```
+>>
+>>> OR
+>>
+>> You can connect to container's tty
+``` bash
+docker exec -it client ash
+```
+>> AND
+``` bash
+docker exec -it server ash
+```
+>> Using __ifconfig__ or __ip addr__ you can find container's inner IP
+>> and ping IP another container (in __tcpdump__ you can see ICMP requests)
+>>
+
+# To verify netcat scripts
+>>> 3.5
+>> when on client side connect is access, you can see message "You connected to server" from server
+>>
+>> If you need proof of netcat interaction use command:
+``` bash
+docker logs server
 ```
